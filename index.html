@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Girlfriend?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffcccb; /* Pink background */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden; /* Prevent scrolling */
+            margin: 0;
+            position: relative; /* For moving elements */
+        }
+        #container {
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            z-index: 1; /* Make sure buttons are above the moving elements */
+            position: relative;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #yes-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #yes-button:hover {
+            background-color: #45a049;
+        }
+        #no-button {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+        }
+        #no-button:hover {
+            background-color: #e60000;
+        }
+        .heart {
+            width: 150px; /* Increased size */
+            height: 150px; /* Increased size */
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center the heart */
+            z-index: 0; /* Ensure the heart is behind the other elements */
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 150px;
+            background: red;
+            border-radius: 100px 100px 0 0;
+            top: 0;
+        }
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .felicia {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff1493; /* Pink color for "Felicia" */
+        }
+        .floating-image {
+            width: 100px; /* Adjust the size of your image */
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Do you want to be my girlfriend?</h1>
+        <button id="yes-button" onclick="answerYes()">Yes</button>
+        <button id="no-button">No</button>
+    </div>
+    
+    <!-- Heart Positioned in the Middle -->
+    <div class="heart"></div>
+
+    <!-- Moving Felicia -->
+    <div class="felicia" id="felicia">Felicia</div>
+
+    <!-- Floating Image -->
+    <img src="cf563ce7-9f77-491b-91ae-0aed14a29544.jpg" alt="Floating Image" class="floating-image" id="floating-image">
+
+    <script>
+        function answerYes() {
+            alert("YEAYYYYYYY JADIAN! 😊");
+        }
+
+        // Function to move elements randomly
+        function moveRandomly(element) {
+            const maxX = window.innerWidth - element.offsetWidth;
+            const maxY = window.innerHeight - element.offsetHeight;
+
+            // Calculate new random position
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+
+            // Apply new position
+            element.style.left = `${newX}px`;
+            element.style.top = `${newY}px`;
+        }
+
+        // Repeatedly move "Felicia" and the image randomly
+        setInterval(() => {
+            moveRandomly(document.getElementById('felicia'));
+            moveRandomly(document.getElementById('floating-image'));
+        }, 1000); // Change every second
+
+        // Move the "No" button when mouse is close or tries to click it
+        const noButton = document.getElementById('no-button');
+        noButton.addEventListener('mousedown', moveButtonOnClick);
+
+        function moveButtonOnClick() {
+            moveRandomly(noButton);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
